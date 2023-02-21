@@ -42,7 +42,7 @@ Now, you're starting a new conversation:
   me: `;
 
   // replace `null` with your OpenAI API key. grab it here: https://beta.openai.com/account/api-keys
-  const API_KEY = null;
+  const API_KEY = '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';
 
   // no point in fetching without an API key 😜
   if (API_KEY === null) {
