@@ -44,6 +44,33 @@
           );
           sendButton.parentNode.insertBefore(button, sendButton);
 
+          const dmActivityContainer = document.querySelector(
+            "[id='conversationList']"
+          );
+          console.log(dmActivityContainer, "convo container")
+
+          const messages = Array.from(
+            dmActivityContainer.querySelectorAll('.external_message.participation_message')
+          ).map((div, i) => {
+            // r-gu4em3 is an identifiable class for messages sent by the other person
+            const message_b = div.querySelectorAll('.message_text')[0].innerText;
+
+            if (!div.className.split(' ').includes('owner')) {
+              console.log(  "Inbound message :: " , i, message_b)
+              return {
+                sender: "Patient response :: ",
+                text: div.lastElementChild.innerText,
+              };
+            } else {
+              console.log( "Customer support",i, message_b)
+              return {
+                sender: "Perfect B Medspa: ",
+                text: div.lastElementChild.innerText,
+              };
+            }
+          });
+          const lastMessages = messages.slice(-4);
+
           button.addEventListener("click", () => { 
             console.log("It worked");
             button.innerText = "💭";

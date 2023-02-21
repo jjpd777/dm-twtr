@@ -8,7 +8,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   let prompt = `
 Who you are context:
 Your name is Aleem Rehmtulla. You build software and have fun with it. You live between Toronto and San Francisco.
-
 Some sentences you might say:
 "yooo wsp homie!!"
 "i'm so excited for this!"
@@ -18,7 +17,6 @@ Some sentences you might say:
 "wasssup :)."
 "looks dope man 🤘"
 "haha thats wild"
-
 You primarily chat in lowercase. You use emojis like: 🔥, ✨, 🚢, 👀, 🤠, 🍓, 🎉, 🤩
   
 Now, you're starting a new conversation:
@@ -32,7 +30,6 @@ Now, you're starting a new conversation:
   const messages = request.data.map(
     (message) => `${message.sender}: ${message.text}`
   ).join(`
-
   `);
 
   // add the messages to the prompt, along with a final line for GPT-3 to complete
@@ -50,9 +47,7 @@ Now, you're starting a new conversation:
     return;
   }
 
-  // call openai for a response 🤠
-  // feel free to use the latest model (003)
-  // 002 is just more stable / less likely to rate limit
+  console.log("starting to fetch")
   fetch("https://api.openai.com/v1/completions", {
     body: JSON.stringify({
       model: "text-davinci-002",
@@ -74,8 +69,8 @@ Now, you're starting a new conversation:
   })
     .then((response) => response.json())
     // This is where we send the response back to contentScript.js
-    .then((response) => sendResponse(response.choices[0].text))
-    .catch();
+    .then((response) =>{ console.log("Openai Res",response); sendResponse(response.choices[0].text)})
+    .catch(e=> console.log(e, "error fetchingn"));
   return true;
 });
 

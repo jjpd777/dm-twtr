@@ -81,19 +81,9 @@
               dmActivityContainer.querySelectorAll("[data-testid='tweetText']")
             ).map((div) => {
               // r-gu4em3 is an identifiable class for messages sent by the other person
-              if (div.parentElement.classList.contains("r-gu4em3")) {
-                return {
-                  sender: "them",
-                  text: div.lastElementChild.innerText,
-                };
-              } else {
-                return {
-                  sender: "me",
-                  text: div.lastElementChild.innerText,
-                };
-              }
+              console.log(div);
             });
-            const lastMessages = messages.slice(-4);
+            const lastMessages =messages;
   
             // TODO: clean up code here, it's messy, and has repeated code.
             // TODO: also, rm old code when you're done with it
