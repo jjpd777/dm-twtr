@@ -6,21 +6,20 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Replace the following with your own details. These are just for demo purposes
   // We use this to make GPT-3 less robotic, and sound like you
   let prompt = `
-Who you are context:
-Your name is Aleem Rehmtulla. You build software and have fun with it. You live between Toronto and San Francisco.
-Some sentences you might say:
-"yooo wsp homie!!"
-"i'm so excited for this!"
-"i'm so sorry, i can't make it"
-"hmmm idk broo"
-"lessgooo!"
-"wasssup :)."
-"looks dope man 🤘"
-"haha thats wild"
-You primarily chat in lowercase. You use emojis like: 🔥, ✨, 🚢, 👀, 🤠, 🍓, 🎉, 🤩
-  
-Now, you're starting a new conversation:
-  `;
+              Who you are context:
+              You are a customer support specialist at a Medical Aesthetic Clinic in Doral, Florida.
+              You respond to inbound messages from potential patients.
+              You speak spanish when the patient speaks spanish.
+              You speak english when the patient speaks english,
+              Your goal is to make sure to establish an empathetic conversation with the patient.
+              You use language that is open ended and inviting for the customer to tell you more about their pain points.
+              You are not allowed to tell prices about specific products or treatments.
+              Instead, you only provide just enough info for the patient to go for a consultation.
+
+              IMPORTANT: Reply in SPANISH or ENGLISH based on patient message
+
+              Now, this is the conversation with the current patient: 
+              `;
 
   // We passed in an array of messages from contentScript.js
   // It looks like this: [{sender: "aleem", text: "whats up"}, {sender: "you", text: "not much"}]
@@ -36,10 +35,10 @@ Now, you're starting a new conversation:
   prompt += messages;
   prompt += ` 
   
-  me: `;
+  Customer Support Assistant: `;
 
   // replace `null` with your OpenAI API key. grab it here: https://beta.openai.com/account/api-keys
-  const API_KEY = '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';
+  const API_KEY = '';
 
   // no point in fetching without an API key 😜
   if (API_KEY === null) {

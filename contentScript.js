@@ -40,7 +40,7 @@
           button.style.transitionDuration = "0.2s";
           button.innerText = "🧠";
           const sendButton = document.querySelector(
-            "[id='SendExternalMessageButton']"
+            "[id='ExternalSendButtonContainer']"
           );
           sendButton.parentNode.insertBefore(button, sendButton);
 
@@ -58,24 +58,25 @@
             if (!div.className.split(' ').includes('owner')) {
               console.log(  "Inbound message :: " , i, message_b)
               return {
-                sender: "Patient response :: ",
+                sender: "Patient Response : ",
                 text: div.lastElementChild.innerText,
               };
             } else {
               console.log( "Customer support",i, message_b)
               return {
-                sender: "Perfect B Medspa: ",
+                sender: "Customer Support Assistant : ",
                 text: div.lastElementChild.innerText,
               };
             }
           });
-          const lastMessages = messages.slice(-4);
+          const lastMessages = messages.slice(-5);
+          console.log("Last 2 messages : ", lastMessages);
 
           button.addEventListener("click", () => { 
             console.log("It worked");
             button.innerText = "💭";
             chrome.runtime.sendMessage(
-                { data: [{sender:"Juancito", text: "What color is the moon yo?"}] },
+                { data: lastMessages },
                 function (response) {
                   console.log(response)
                   if (
@@ -83,7 +84,58 @@
                     response != "" &&
                     response != "No API key"
                   ) {
-                    console.log("success")
+
+                    response = response.trim();
+                    const inputData = document.querySelector(".edit_area");
+                    const hasText =inputData.lastElementChild;
+                    console.log(hasText, "Has text")
+                    // const inputData = document.querySelector(
+                    //   ".DraftEditor-editorContainer"
+                    // ).lastElementChild?.lastElementChild?.lastElementChild
+                    //   .lastElementChild?.lastElementChild?.innerHTML;
+                    // // We'll also check if the placeholder text exists, if it does, we click smthg else
+                    // const placeholder = document.querySelector(
+                    //   ".public-DraftEditorPlaceholder-inner"
+                    // );
+
+
+                    const rootDiv = document.querySelector(
+                      ".edit_area"
+                    );
+
+                  if (hasText.length >0 ) {
+                  
+                        // Simulate a click event on the element
+                        var event = new MouseEvent("click", {
+                          bubbles: true,
+                          cancelable: true,
+                          view: window,
+                        });
+                        rootDiv.dispatchEvent(event);
+                        document.execCommand("insertText", false, response);
+                        button.innerText = "YYY";
+
+                    }else{
+
+                          // Simulate a click event on the element
+                          var event = new MouseEvent("click", {
+                            bubbles: true,
+                            cancelable: true,
+                            view: window,
+                          });
+                          rootDiv.dispatchEvent(event);
+      
+                          // delete the current, and insert the new text
+                          document.execCommand("selectAll", false, null);
+                          document.execCommand("delete", false, null);
+                          document.execCommand("insertText", false, response);
+                          button.innerText = "🧠";
+
+                    }
+                   
+                 
+
+
                   }else{
                     alert("Lmao dog")
                   }
