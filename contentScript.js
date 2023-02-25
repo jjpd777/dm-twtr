@@ -78,7 +78,7 @@
             chrome.runtime.sendMessage(
                 { data: lastMessages },
                 function (response) {
-                  console.log(response)
+                  console.log(response, "The response from the Background.js file")
                   if (
                     response != undefined &&
                     response != "" &&
@@ -114,6 +114,7 @@
                         rootDiv.dispatchEvent(event);
                         document.execCommand("insertText", false, response);
                         button.innerText = "YYY";
+                        button.innerText = "🧠";
 
                     }else{
 
