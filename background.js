@@ -44,7 +44,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   Customer Support Assistant: `;
 
   // replace `null` with your OpenAI API key. grab it here: https://beta.openai.com/account/api-keys
-  const API_KEY = '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';
+  const API_KEY = '';
 
   // no point in fetching without an API key 😜
   if (API_KEY === null) {
