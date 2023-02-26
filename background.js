@@ -35,6 +35,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   ).join(`
   `);
 
+  console.log("These are the messages as read from the Background.js file: ", messages)
+
   // add the messages to the prompt, along with a final line for GPT-3 to complete
   prompt += messages;
   prompt += ` 
@@ -42,7 +44,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   Customer Support Assistant: `;
 
   // replace `null` with your OpenAI API key. grab it here: https://beta.openai.com/account/api-keys
-  const API_KEY = '';
+  const API_KEY = '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';
 
   // no point in fetching without an API key 😜
   if (API_KEY === null) {

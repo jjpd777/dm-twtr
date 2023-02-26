@@ -102,6 +102,7 @@
                     const rootDiv = document.querySelector(
                       ".edit_area"
                     );
+                    const rooty = rootDiv.querySelector('.external')
 
                   if (hasText.length >0 ) {
                   
@@ -111,7 +112,7 @@
                           cancelable: true,
                           view: window,
                         });
-                        rootDiv.dispatchEvent(event);
+                        rooty.dispatchEvent(event);
                         document.execCommand("insertText", false, response);
                         button.innerText = "YYY";
                         button.innerText = "🧠";
@@ -130,7 +131,7 @@
                           document.execCommand("selectAll", false, null);
                           document.execCommand("delete", false, null);
                           document.execCommand("insertText", false, response);
-                          button.innerText = "🧠";
+                          button.innerText = "🧠🧠🧠";
 
                     }
                    
