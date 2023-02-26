@@ -21,7 +21,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
               - -
 
-              Now, this is the conversation with the current patient: 
+              Now, this is the conversation with the current patient. Some messages might be shown as the conversation
+              advances with a specific patient. 
               `;
 
   // We passed in an array of messages from contentScript.js
