@@ -6,29 +6,23 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Replace the following with your own details. These are just for demo purposes
   // We use this to make GPT-3 less robotic, and sound like you
   let prompt = `
-              Who you are context:
-              You are the founder of a hot tech startup.
-              You are reaching out to a potential customer on LinkedIn.
-              You want to have a friendly opener regarding the industry in which the person works and operates.
+  You are a sales representative.
+  You are selling a chrome extension that automates outbound on LinkedIn.
+  Your goal is to establish ask "How do you manage outbound sales?"
+  Make sure to include information about the propsect in a personalized way.
+  Be concise and brief.
 
-              - -
+  -------
+  Prospect information:
 
-              Ask a thoughtul question based on the profile of the following work experience
-              
-              `;
+  
+               `;
 
-  // We passed in an array of messages from contentScript.js
-  // It looks like this: [{sender: "aleem", text: "whats up"}, {sender: "you", text: "not much"}]
-  // Now, we'll convert it to a string that looks like this:
-  // aleem: whats up
-  // you: not much
+
   const messages = request.data;
 
-
-  console.log("These are the messages as read from the Background.js file: ", messages)
-
-  // add the messages to the prompt, along with a final line for GPT-3 to complete
   prompt += messages;
+
   
 
   // replace `null` with your OpenAI API key. grab it here: https://beta.openai.com/account/api-keys
@@ -43,7 +37,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("starting to fetch")
   fetch("https://api.openai.com/v1/completions", {
     body: JSON.stringify({
-      model: "text-davinci-002",
+      model: "text-davinci-003",
       prompt: prompt,
       temperature: 0.8,
       max_tokens: 256,

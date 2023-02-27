@@ -43,6 +43,10 @@
           console.log(workExperience, "Successful work experience fetched");
           console.log(workExperience.innerText, "Inner Text ");
           const workText = workExperience.innerText;
+          var prospectName = document.querySelector('.artdeco-entity-lockup__title.ember-view').innerText;
+          prospectName = prospectName.split(' ').join(' ')
+          const fullTextMessage = prospectName + workText;
+          console.log("The name and full message", fullTextMessage)
           // const dmActivityContainer = document.querySelector( "[id='conversationList']");
 
 
@@ -51,7 +55,7 @@
 
             button.innerText = "💭";
             chrome.runtime.sendMessage(
-                { data: workText },
+                { data: fullTextMessage },
                 function (response) {
 
                   console.log(response, "The response from the Background.js file")
