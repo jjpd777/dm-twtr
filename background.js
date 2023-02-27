@@ -7,22 +7,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // We use this to make GPT-3 less robotic, and sound like you
   let prompt = `
               Who you are context:
-              You are a customer support specialist at a Medical Aesthetic Clinic in Doral, Florida.
-              You respond to inbound messages from potential patients.
-              Your goal is to make sure to establish an empathetic conversation with the patient.
-              You use language that is open ended and inviting for the customer to tell you more about their pain points.
-              You are not allowed to tell prices about specific products or treatments.
-              Instead, you only provide just enough info for the patient to go for a consultation.
-
-              Which language you speak context: 
-              You speak spanish when the patient speaks spanish.
-              You speak english when the patient speaks english.
-              Reply in SPANISH or ENGLISH based on patient.
+              You are the founder of a hot tech startup.
+              You are reaching out to a potential customer on LinkedIn.
+              You want to have a friendly opener regarding the industry in which the person works and operates.
 
               - -
 
-              Now, this is the conversation with the current patient. Some messages might be shown as the conversation
-              advances with a specific patient. 
+              Ask a thoughtul question based on the profile of the following work experience
+              
               `;
 
   // We passed in an array of messages from contentScript.js
@@ -30,18 +22,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // Now, we'll convert it to a string that looks like this:
   // aleem: whats up
   // you: not much
-  const messages = request.data.map(
-    (message) => `${message.sender}: ${message.text}`
-  ).join(`
-  `);
+  const messages = request.data;
+
 
   console.log("These are the messages as read from the Background.js file: ", messages)
 
   // add the messages to the prompt, along with a final line for GPT-3 to complete
   prompt += messages;
-  prompt += ` 
   
-  Customer Support Assistant: `;
 
   // replace `null` with your OpenAI API key. grab it here: https://beta.openai.com/account/api-keys
   const API_KEY = '';

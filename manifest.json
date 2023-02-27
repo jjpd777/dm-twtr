@@ -1,14 +1,14 @@
 {
-  "name": "Twitter DM Drafter",
+  "name": "LinkedIn Drafter",
   "version": "0.1.0",
-  "description": "Draft Twitter DMs with GPT-3",
-  "host_permissions": ["https://app.robinhq.com/*"],
+  "description": "Draft LinkedIn DMs with GPT-3",
+  "host_permissions": ["https://www.linkedin.com/*"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://app.robinhq.com/*"],
+      "matches": ["https://www.linkedin.com/*"],
       "js": ["contentScript.js"]
     }
   ],
@@ -16,7 +16,7 @@
     "default_icon": {
       "16": "assets/logo.png"
     },
-    "default_title": "Twitter DM Drafter",
+    "default_title": "LinkedIn DM Drafter",
     "default_popup": "popup.html"
   },
   "manifest_version": 3
