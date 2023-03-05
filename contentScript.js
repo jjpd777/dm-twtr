@@ -33,34 +33,34 @@
           // const sendButton = document.querySelector( "[id='SendExternalMessageButton']" );
           sendButton.parentNode.insertBefore(button, sendButton);
 
-          const dmActivityContainer = document.querySelector( "[id='conversationList']");
-
-
-          const messages = Array.from(
-            dmActivityContainer.querySelectorAll('.external_message.participation_message')
-          ).map((div, i) => {
-            const message_b = div.querySelectorAll('.message_text')[0].innerText;
-
-            if (!div.className.split(' ').includes('owner')) {
-              console.log(  "Inbound message : " , i, message_b)
-              return {
-                sender: "Patient Response : ",
-                text: div.lastElementChild.innerText,
-              };
-            } else {
-              console.log( "Customer support",i, message_b)
-              return {
-                sender: "Customer Support Assistant : ",
-                text: div.lastElementChild.innerText,
-              };
-            }
-          });
-
-          const lastMessages = messages.slice(-5);
-          console.log("Recent messages : ", lastMessages);
-
           button.addEventListener("click", () => { 
 
+            const dmActivityContainer = document.querySelector( "[id='conversationList']");
+
+
+            const messages = Array.from(
+              dmActivityContainer.querySelectorAll('.external_message.participation_message')
+            ).map((div, i) => {
+              const message_b = div.querySelectorAll('.message_text')[0].innerText;
+  
+              if (!div.className.split(' ').includes('owner')) {
+                console.log(  "Inbound message : " , i, message_b)
+                return {
+                  sender: ``,
+                  text: div.lastElementChild.innerText,
+                };
+              } else {
+                console.log( "Customer support",i, message_b)
+                return {
+                  sender:``,
+                  text: div.lastElementChild.innerText,
+                };
+              }
+            });
+  
+            const lastMessages = messages.slice(-5);
+            console.log("Recent messages : ", lastMessages);
+  
             button.innerText = "💭";
             chrome.runtime.sendMessage(
                 { data: lastMessages },
@@ -73,6 +73,7 @@
                     response = response.trim();
                     const inputData = document.querySelector(".edit_area");
                     const hasText = inputData.querySelector('.external').innerHTML;
+                    console.log("Has inner HTML:" , hasText);
 
               
                     // Check if input field is empty before sending the message
@@ -89,22 +90,10 @@
 
               
                       if (!!hasText) {
-                        console.log("Has inner text", rooty);
-                        // const fuckyes = document.querySelector(".edit_area");
-                        // const fuckkk = fuckyes.querySelector('.external');
-                        // // Simulate a click event on the element
-                        // var event = new MouseEvent("click", {
-                        //   bubbles: true,
-                        //   cancelable: true,
-                        //   view: window,
-                        // });
-                        // fuckkk.dispatchEvent(event);
-              
-                        // delete the current, and insert the new text
                         document.execCommand("selectAll", false, null);
                         document.execCommand("delete", false, null);
                         document.execCommand("insertText", false, response);
-                        button.innerText = "🧠🧠🧠🧠";
+                        button.innerText = "🧠";
                       } else {
                         const rooot = document.querySelector( "[id='ExternalSendButtonContainer']" );
 
@@ -121,7 +110,7 @@
                         // document.execCommand("selectAll", false, null);
                         // document.execCommand("delete", false, null);
                         document.execCommand("insertText", false, response);
-                        button.innerText = "🧠🧠";
+                        button.innerText = "🧠";
                       }
                   
 

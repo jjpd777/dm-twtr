@@ -7,6 +7,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // We use this to make GPT-3 less robotic, and sound like you
   let prompt = `
               Who you are context:
+              Your name is Rafael Silva.
               You are a customer support specialist at a Medical Aesthetic Clinic in Doral, Florida.
               You respond to inbound messages from potential patients.
               Your goal is to make sure to establish an empathetic conversation with the patient.
@@ -21,8 +22,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
               - -
 
-              Now, this is the conversation with the current patient. Some messages might be shown as the conversation
-              advances with a specific patient. 
+              Now, this is the conversation with the current patient. 
+
               `;
 
   // We passed in an array of messages from contentScript.js
@@ -35,16 +36,21 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   ).join(`
   `);
 
-  console.log("These are the messages as read from the Background.js file: ", messages)
+
 
   // add the messages to the prompt, along with a final line for GPT-3 to complete
   prompt += messages;
   prompt += ` 
   
-  Customer Support Assistant: `;
+  --- Provide the best message for the customer suppor agent to reply in this conversation:
+  
+  `;
+
+  console.log("=========== Prompt as sent to GPT API: =============");
+  console.log(prompt);
 
   // replace `null` with your OpenAI API key. grab it here: https://beta.openai.com/account/api-keys
-  const API_KEY = '';
+  const API_KEY = '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';
 
   // no point in fetching without an API key 😜
   if (API_KEY === null) {
